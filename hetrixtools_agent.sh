@@ -23,6 +23,9 @@
 ## Settings ##
 ##############
 
+# Where to upload the data
+UploadTo=https://sm.hetrixtools.net/
+
 # Set PATH
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ScriptPath=$(dirname "${BASH_SOURCE[0]}")
@@ -448,4 +451,4 @@ POST="v=$VERSION&s=$SID&d=$DATA"
 echo $POST > $ScriptPath/hetrixtools_agent.log
 
 # Post data
-wget -t 1 -T 30 -qO- --post-file="$ScriptPath/hetrixtools_agent.log" --no-check-certificate https://sm.hetrixtools.net/ &> /dev/null
+wget -t 1 -T 30 -qO- --post-file="$ScriptPath/hetrixtools_agent.log" --no-check-certificate $UploadTo &> /dev/null

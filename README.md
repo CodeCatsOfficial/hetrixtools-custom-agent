@@ -1,3 +1,7 @@
+# Fork Information
+
+This fork allows specifying where the data is posted, allowing use of proxies and similar software.
+
 # HetrixTools Linux Server Monitoring Agent
 
 Documentation available here: https://docs.hetrixtools.com/category/server-monitor/
