@@ -24,7 +24,7 @@
 ##############
 
 # Where to upload the data
-UploadTo=https://sm.hetrixtools.net/
+UploadTo="https://sm.hetrixtools.net/"
 
 # Set PATH
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
