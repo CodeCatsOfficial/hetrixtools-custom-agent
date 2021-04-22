@@ -198,6 +198,9 @@ do
 	# Get CPU Load
 	CPU=$(echo $[100-$( echo "$VMSTAT" | awk '{print $15}')])
 	tCPU=$(echo | awk "{ print $tCPU + $CPU }")
+	# Get CPU Steal
+	CPUSteal=$(echo $[100-$( echo "$VMSTAT" | awk '{print $17}')])
+	tCPUSteal=$(echo | awk "{ print $tCPUSteal + $CPUSteal }")
 	# Get IO Wait
 	IOW=$( echo "$VMSTAT" | awk '{print $16}')
 	tIOW=$(echo | awk "{ print $tIOW + $IOW }")
@@ -307,6 +310,8 @@ CPUSpeed=$(echo -ne "$CPUSpeed" | base64)
 CPUCores=$(cat /proc/cpuinfo | grep processor | wc -l)
 # Calculate average CPU Usage
 CPU=$(echo | awk "{ print $tCPU / $X }")
+# Calcualte average CPU Steal
+CPUSteal=$(echo | awk "{ print $tCPUSteal / $X }")
 # Calculate IO Wait
 IOW=$(echo | awk "{ print $tIOW / $X }")
 # Get system memory (RAM)
@@ -446,7 +451,8 @@ fi
 
 # Prepare data
 DATA="$OS|$Uptime|$CPUModel|$CPUSpeed|$CPUCores|$CPU|$IOW|$RAMSize|$RAM|$SwapSize|$Swap|$DISKs|$NICS|$ServiceStatusString|$RAID|$DH|$RPS1|$RPS2|$IOPS|$CONN|$DISKi"
-POST="v=$VERSION&s=$SID&d=$DATA"
+EXTRA="$CPUSteal"
+POST="v=$VERSION&s=$SID&d=$DATA&e=$EXTRA"
 # Save data to file
 echo $POST > $ScriptPath/hetrixtools_agent.log
 
